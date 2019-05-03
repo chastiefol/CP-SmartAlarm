@@ -26,7 +26,7 @@ ______
 
 ______
 # Team Member
-|<img src="README/jamesmhee.jpg" width="150px" height="150px">|<img src="README/PQZBoat.jpg" width="150px" height="150px">|<img src="README/rapeeza1598.jpeg" width="150px" height="150px">|<img src="README/chastiefol.jpeg" width="150px" height="150px">|
+|<img src="README/jamesmhee.jpg" width="150px" height="150px">|<img src="README/PQZBoat.jpg" width="150px" height="150px">|<img src="README/rapeeza1598.jpeg" width="150px" height="150px">|<img src="README/chastiefol.jpg" width="150px" height="150px">|
 |:-----:|:-----:|:-----:|:-----:|
 |[jamesmhee](https://github.com/jamesmhee)|[PQZBoat](https://github.com/PQZBoat)|[rapeeza1598](https://github.com/rapeeza1598)|[chastiefol](https://github.com/chastiefol)|
 #### รายชื่อสมาชิก
