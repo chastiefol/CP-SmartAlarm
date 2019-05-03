@@ -7,7 +7,7 @@ void setup() {
   pinMode(speakerPin,OUTPUT);
   pinMode(button,INPUT);
 
-  // Serial.begin(115200);
+  Serial.begin(115200);
   display("display");
   displayInit();
   display("WIFI");
@@ -25,6 +25,8 @@ void setup() {
   server.on("/alarms", handleGetAlarms);
   server.on("/set/alarm", handleSetAlarm);
   server.on("/del/alarm", handleDelAlarm);
+  server.on("/set/volume", handleSetVolume);
+  server.on("/set/pitch", handleSetPitch);
 
   server.onNotFound(handleNotFound);
 

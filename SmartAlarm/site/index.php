@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SmartAlarm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="https://img.icons8.com/metro/26/000000/alarm-clock.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -70,12 +71,26 @@
                                 <input class="btn btn-primary col-8 mx-auto m-1 p-2" type="submit" name="setClock" value="%s" %s>
                             </form>
                         </div>
-                    </div>', $device->name, $_GET["node"], $alarms->count < 10 ? "" : "disabled", $alarms->count < 10 ? "" : "disabled", $alarms->count < 10 ? "Set alarm" : "Alarm is full.", $alarms->count < 10 ? "" : "disabled");
-                echo '<div class="card p-5 mt-3" id="alarm">
-                        <div class="contain mx-auto col-8 mx-auto">
+                    </div>', $device->name, $_GET["node"], $alarms->count < 10 ? "" : "disabled", $alarms->count < 10 ? "" : "disabled", $alarms->count < 10 ? "Set alarm" : "Alarm is full.", $alarms->count < 10 ? "" : "disabled"); ?>
+                <div class="card p-5 mt-3" id="alarm">
+                        <div class="contain mx-auto col-12 mx-auto">
                             <h3 class="text-center">Alarm</h3>
-                            <ul class="list-group col-12 mx-auto">';
-                $i = 0;
+                        </div>
+                        <div class="contain mx-auto col-12">
+                            <p>Volume</p>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="volume-control">
+                            </div>
+                        </div>
+                        <div class="contain mx-auto col-12">
+                            <p>Pitch</p>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="pitch-control">
+                            </div>
+                        </div>
+                        <div class="contain mx-auto col-12">
+                            <ul class="list-group col-12 mx-auto">
+                <?php $i = 0;
                 foreach($alarms->alarms as $value){
                     printf('<li class="list-group-item"><span class="col-10 d-inline-block">%02d : %02d</span> <a href="./?node=%s&delClock=%d" role="button" class="btn btn-outline-danger ml-0">Delete</a></li>', $value->hour, $value->minute, $_GET["node"], $i);
                     $i = $i + 1;
@@ -113,4 +128,78 @@ function checkTime(i) {
   return i;
 }
 </script>
+
+<style>
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+</style>
+
+<script>
+
+    var volume_slider = document.getElementById("volume-control");
+    var pitch_slider = document.getElementById("pitch-control");
+
+    volume_slider.onchange = function() {
+        console.log("volume");
+        console.log(this.value);
+        $.ajax({
+            url: "<?php echo $_GET["node"] ?>/set/volume?i="+this.value,
+            dataType: "jsonp",
+            success: function (data) {
+                console.log(data);
+            }
+
+        });
+    }
+    pitch_slider.onchange = function() {
+        console.log("Pitch");
+        console.log(this.value);
+        $.ajax({
+            url: "<?php echo $_GET["node"] ?>/set/pitch?i="+this.value,
+            dataType: "jsonp",
+            success: function (data) {
+                console.log(data);
+            }
+
+        })
+    }
+
+</script>
+
 </html>

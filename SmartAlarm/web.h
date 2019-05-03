@@ -9,7 +9,7 @@ void handleRoot() {
   char temp[1000];
 
   snprintf(temp, 1000,
-  "[ { \"hour\" : %d, \"min\" : %d, \"sec\" : %d, \"name\": \"%s\" }, "
+  "[ { \"hour\" : %d, \"min\" : %d, \"sec\" : %d, \"name\": \"%s\" },"
   , p_tm->tm_hour, p_tm->tm_min, p_tm->tm_sec, deviceName );
 
   String message = String(temp);
@@ -76,6 +76,14 @@ void handleDelAlarm(){
 
   alarmCount--;
   handleGetAlarms();
+}
+
+void handleSetVolume () {
+  Serial.println(server.arg(0).toInt());
+}
+
+void handleSetPitch () {
+  Serial.println(server.arg(0).toInt());
 }
 
 void handleNotFound() {
