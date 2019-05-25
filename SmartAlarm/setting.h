@@ -9,8 +9,8 @@ const char* ntpServer1      = "pool.ntp.org";
 const char* ntpServer2      = "time.nist.gov";
 
 // Wifi configuration
-#define wifiname        "DukesTheHacker";
-#define wifipass        "0949892974";
+#define wifiname        "SSID";
+#define wifipass        "Password";
 
 // speakerPin
 const int speakerPin        = 12;
